@@ -4,7 +4,7 @@ class ReviewItem extends StatelessWidget {
   String comment;
   String createdAt;
 
-  ReviewItem(this.comment, this.createdAt);
+  ReviewItem(this.comment, this.createdAt, {super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'package:location_review_search_app/ui/pages/review/widgets/review_item.d
 
 class ReviewPage extends StatelessWidget {
   String title;
-  ReviewPage(this.title);
+  ReviewPage(this.title, {super.key});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

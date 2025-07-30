@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ReviewBottomSheet extends StatefulWidget {
   final double bottomPadding;
-  ReviewBottomSheet({super.key, required this.bottomPadding});
+  const ReviewBottomSheet({super.key, required this.bottomPadding});
 
   @override
   State<ReviewBottomSheet> createState() => _ReviewBottomSheetState();

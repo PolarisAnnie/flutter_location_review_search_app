@@ -6,7 +6,7 @@ class AddressItem extends StatelessWidget {
   String category;
   String roadAddress;
 
-  AddressItem(this.title, this.category, this.roadAddress);
+  AddressItem(this.title, this.category, this.roadAddress, {super.key});
 
   @override
   Widget build(BuildContext context) {

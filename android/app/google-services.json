@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1021320575671",
+    "project_id": "flutter-location-review-app",
+    "storage_bucket": "flutter-location-review-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021320575671:android:e9c6c161538b6fdadbeb32",
+        "android_client_info": {
+          "package_name": "com.example.location_review_search_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC62u2V7GleDE7PdCJ2EtxemaZAyQkI_fY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

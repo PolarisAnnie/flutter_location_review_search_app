@@ -44,19 +44,17 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: ListView(
             children: [
-              SizedBox(height: 12),
+              SizedBox(height: 8),
               AddressItem(
                 '삼성1동 주민센터',
                 '공공,사회기관>행정복지센터',
                 '서울특별시 강남구 봉은사로 616 삼성1동 주민센터',
               ),
-              SizedBox(height: 12),
               AddressItem(
                 '삼성2동 주민센터',
                 '공공,사회기관>행정복지센터',
                 '서울특별시 강남구 봉은사로 616 삼성2동 주민센터',
               ),
-              SizedBox(height: 12),
               AddressItem('코엑스', '문화,예술>컨벤션센터', '서울특별시 강남구 영동대로 513'),
             ],
           ),

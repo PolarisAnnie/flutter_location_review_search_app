@@ -10,7 +10,7 @@
 //   "mapy": "375551473"
 // },
 
-class LocationModel {
+class Location {
   final String title;
   final String link;
   final String category;
@@ -21,7 +21,7 @@ class LocationModel {
   final String mapx;
   final String mapy;
 
-  LocationModel({
+  Location({
     required this.title,
     required this.link,
     required this.category,
@@ -33,7 +33,7 @@ class LocationModel {
     required this.mapy,
   });
 
-  LocationModel.fromJson(Map<String, dynamic> map)
+  Location.fromJson(Map<String, dynamic> map)
     : this(
         title: map['title'],
         link: map['link'],

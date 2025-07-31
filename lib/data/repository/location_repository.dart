@@ -6,7 +6,7 @@ import 'package:location_review_search_app/data/repository/naver_api_service.dar
 class LocationRepository extends NaverApiService {
   final NaverApiService _naverApi = NaverApiService();
 
-  Future<List<LocationModel>?> search(String query) async {
+  Future<List<Location>?> search(String query) async {
     if (query.trim().isEmpty) {
       throw ArgumentError('검색어를 입력해주세요');
     }
@@ -21,7 +21,7 @@ class LocationRepository extends NaverApiService {
       final List<dynamic> items = data['items'];
 
       return items
-          .map((json) => LocationModel.fromJson(json as Map<String, dynamic>))
+          .map((json) => Location.fromJson(json as Map<String, dynamic>))
           .toList();
     }
     return null;

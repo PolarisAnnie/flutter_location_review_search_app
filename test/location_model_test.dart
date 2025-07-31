@@ -20,8 +20,8 @@ void main() {
 
   test('Location Model test', () {
     Map<String, dynamic> map = jsonDecode(jsonString);
-    LocationModel locationModel = LocationModel.fromJson(map);
+    Location location = Location.fromJson(map);
 
-    expect(locationModel.roadAddress, "서울특별시 마포구 동교로15길 7 서교동주민자치회");
+    expect(location.roadAddress, "서울특별시 마포구 동교로15길 7 서교동주민자치회");
   });
 }

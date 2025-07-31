@@ -16,7 +16,7 @@ void main() {
 
   test('Review Model test', () {
     Map<String, dynamic> map = jsonDecode(jsonString);
-    ReviewModel reviewModel = ReviewModel.fromJson(map);
+    Review reviewModel = Review.fromJson(map);
 
     expect(reviewModel.content, "짱이에요");
   });

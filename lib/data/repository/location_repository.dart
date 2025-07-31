@@ -1,29 +1,39 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:location_review_search_app/data/model/location_model.dart';
-import 'package:location_review_search_app/data/repository/naver_api_service.dart';
 
-class LocationRepository extends NaverApiService {
-  final NaverApiService _naverApi = NaverApiService();
+class LocationRepository {
+  late final Dio _dio;
 
-  Future<List<Location>?> search(String query) async {
-    if (query.trim().isEmpty) {
-      throw ArgumentError('검색어를 입력해주세요');
-    }
-
-    final response = await _naverApi.client.get(
-      '/v1/search/local.json',
-      queryParameters: {'query': query, 'display': 5, 'sort': 'random'},
+  LocationRepository() {
+    _dio = Dio(
+      // 초기 설정
+      BaseOptions(
+        baseUrl: 'https://openapi.naver.com/v1/search',
+        headers: {
+          'X-Naver-Client-Id': "G4FWJm2_ceRy8bVR2nML",
+          'X-Naver-Client-Secret': "Sud8a9FwzA",
+        },
+        // 최대 5개 표시, 정확도 순으로 내림차순 정렬
+        queryParameters: {'display': 5, 'sort': 'random'},
+        // 타임아웃 처리
+        connectTimeout: Duration(seconds: 10),
+        receiveTimeout: Duration(seconds: 10),
+      ),
     );
+  }
 
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> data = response.data;
-      final List<dynamic> items = data['items'];
-
-      return items
-          .map((json) => Location.fromJson(json as Map<String, dynamic>))
-          .toList();
+  // 검색 메서드 구현
+  Future<List<Location>> searchPlaces(String query) async {
+    // 입력값 검증
+    query = query.trim();
+    if (query.isEmpty) {
+      throw ArgumentError('검색어 값이 없습니다');
     }
-    return null;
+
+    // API 호출 코드 작성
+    final Response response = await _dio.get(
+      '/local.json',
+      queryParameters: {'query': query},
+    );
   }
 }

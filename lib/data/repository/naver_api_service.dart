@@ -19,3 +19,6 @@ class NaverApiService {
     ),
   );
 }
+
+//없어도 될듯
+// 다른 곳에서 안쓰는 거기 때문에 location repository 내에 넣어도 됨

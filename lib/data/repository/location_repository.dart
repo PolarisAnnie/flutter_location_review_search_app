@@ -22,7 +22,7 @@ class LocationRepository {
     );
   }
 
-  // 검색 메서드 구현
+  // 검색 메서드 구현 > 다수의 검색 결과가 나올 수 있기 때문에 List 형태로 타입 결정
   Future<List<Location>> searchPlaces(String query) async {
     // 입력값 검증
     query = query.trim();
@@ -35,5 +35,11 @@ class LocationRepository {
       '/local.json',
       queryParameters: {'query': query},
     );
+
+    // 데이터 추출 코드 작성
+    final List items = response.data['items'] ?? [];
+
+    // Location 객체로 변환
+    return items.map((item) => Location.fromJson(item)).toList();
   }
 }

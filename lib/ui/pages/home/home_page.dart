@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:location_review_search_app/data/model/location_model.dart';
+import 'package:location_review_search_app/ui/pages/home/home_view_model.dart';
 import 'package:location_review_search_app/ui/pages/home/widgets/address_item.dart';
+import 'package:location_review_search_app/ui/pages/review/review_page.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
   TextEditingController textEditingController = TextEditingController();
 
   void search(String text) {
+    ref.read(locationViewModelProvider.notifier).search(text);
     print('search');
   }
 
@@ -23,9 +28,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    LocationState locationState = ref.watch(locationViewModelProvider);
     return GestureDetector(
       onTap: () {
-        FocusScope.of(context).unfocus;
+        FocusScope.of(context).unfocus();
       },
       child: Scaffold(
         appBar: AppBar(
@@ -44,21 +50,16 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: ListView(
-            children: [
-              SizedBox(height: 8),
-              AddressItem(
-                '삼성1동 주민센터',
-                '공공,사회기관>행정복지센터',
-                '서울특별시 강남구 봉은사로 616 삼성1동 주민센터',
-              ),
-              AddressItem(
-                '삼성2동 주민센터',
-                '공공,사회기관>행정복지센터',
-                '서울특별시 강남구 봉은사로 616 삼성2동 주민센터',
-              ),
-              AddressItem('코엑스', '문화,예술>컨벤션센터', '서울특별시 강남구 영동대로 513'),
-            ],
+          child: ListView.builder(
+            itemCount: locationState.locations.length,
+            itemBuilder: (context, index) {
+              Location location = locationState.locations[index];
+              return AddressItem(
+                location.title,
+                location.category,
+                location.roadAddress,
+              );
+            },
           ),
         ),
       ),

@@ -47,6 +47,12 @@ class _HomePageState extends ConsumerState<HomePage> {
               ),
             ),
           ),
+          actions: [
+            Container(
+              width: 50,
+              child: IconButton(onPressed: () {}, icon: Icon(Icons.gps_fixed)),
+            ),
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),

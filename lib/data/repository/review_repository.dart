@@ -7,19 +7,16 @@ class ReviewRepository {
 
   // 컬렉션 내 mapX, mapY 좌표에 해당하는 리뷰 불러오기
   Future<List<Review>> getReviewsByMap(double mapX, double mapY) async {
-    print('Repository getReviewsByMap 호출됨: $mapX, $mapY');
     QuerySnapshot querySnapshot = await firestore
         .collection(collectionName)
         .where('mapX', isEqualTo: mapX.toString()) // 각 좌표에 해당하는 리뷰 필터링
         .where('mapY', isEqualTo: mapY.toString())
         .get(); // 결과 가져오기
-    print('Firebase에서 조회된 문서 개수: ${querySnapshot.docs.length}');
 
     List<DocumentSnapshot> documentSnapshot = querySnapshot.docs;
     List<Review> reviews = documentSnapshot
         .map((doc) => Review.fromJson(doc.data() as Map<String, dynamic>))
         .toList();
-    print('변환된 Review 객체 개수: ${reviews.length}');
 
     return reviews;
   }

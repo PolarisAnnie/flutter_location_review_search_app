@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:location_review_search_app/data/repository/post_repository.dart';
 import 'package:location_review_search_app/firebase_options.dart';
 import 'package:location_review_search_app/ui/pages/home/home_page.dart';
 
@@ -10,7 +9,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  await PostRepository().getAll();
   // ProviderScope 로 앱을 감싸서 RiverPod이 ViewModel 관리할 수 있게 선언
   runApp(const ProviderScope(child: MyApp()));
 }

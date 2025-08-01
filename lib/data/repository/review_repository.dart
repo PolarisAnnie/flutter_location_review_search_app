@@ -14,18 +14,9 @@ class ReviewRepository {
         .get(); // 결과 가져오기
 
     List<DocumentSnapshot> documentSnapshot = querySnapshot.docs;
-    List<Review> reviews = [];
-
-    for (DocumentSnapshot doc in documentSnapshot) {
-      // 각 문서에서 데이터 추출
-      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-
-      // Map을 Review 객체로 변환
-      Review review = Review.fromJson(data);
-
-      // 리스트에 추가
-      reviews.add(review);
-    }
+    List<Review> reviews = documentSnapshot
+        .map((doc) => Review.fromJson(doc.data() as Map<String, dynamic>))
+        .toList();
 
     return reviews;
   }

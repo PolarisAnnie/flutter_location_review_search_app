@@ -58,6 +58,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                 location.title,
                 location.category,
                 location.roadAddress,
+                location.mapx,
+                location.mapy,
               );
             },
           ),

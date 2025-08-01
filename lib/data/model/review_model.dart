@@ -2,14 +2,14 @@
 // {mapX: 123445, id: 1, content: 짱이에요, mapY: 343533, createdAt:2025-07-30T20:40:00.000Z}
 
 class Review {
-  final String id;
+  final String? id;
   final String content;
   final DateTime createdAt;
   final double mapX;
   final double mapY;
 
   Review({
-    required this.id,
+    this.id,
     required this.content,
     required this.createdAt,
     required this.mapX,

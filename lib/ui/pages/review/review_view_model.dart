@@ -19,6 +19,7 @@ class ReviewViewModel extends Notifier<ReviewState> {
   // 해당 좌표에 해당하는 모든 리뷰를 가지고 오는 메서드
   Future<void> getReviewByLocation(double mapX, double mapY) async {
     List<Review> reviews = await repository.getReviewsByMap(mapX, mapY);
+
     state = ReviewState(reviews: reviews);
   }
 

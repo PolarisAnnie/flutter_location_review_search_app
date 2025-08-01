@@ -5,8 +5,17 @@ class AddressItem extends StatelessWidget {
   String title;
   String category;
   String roadAddress;
+  String mapX;
+  String mapY;
 
-  AddressItem(this.title, this.category, this.roadAddress, {super.key});
+  AddressItem(
+    this.title,
+    this.category,
+    this.roadAddress,
+    this.mapX,
+    this.mapY, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +25,7 @@ class AddressItem extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              // TODO: ReviewPage에 타이틀, mapX, mapY 좌표 전달
-              return ReviewPage(title);
+              return ReviewPage(title, mapX, mapY);
             },
           ),
         );

@@ -1,18 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:location_review_search_app/ui/pages/review/review_view_model.dart';
 import 'package:location_review_search_app/ui/pages/review/widgets/review_bottom_sheet.dart';
 import 'package:location_review_search_app/ui/pages/review/widgets/review_item.dart';
 
-class ReviewPage extends StatelessWidget {
+class ReviewPage extends ConsumerStatefulWidget {
   String title;
-  ReviewPage(this.title, {super.key});
+  String mapX;
+  String mapY;
+  ReviewPage(this.title, this.mapX, this.mapY, {super.key});
+
+  @override
+  ConsumerState<ReviewPage> createState() => _ReviewPageState();
+}
+
+class _ReviewPageState extends ConsumerState<ReviewPage> {
+  @override
+  // ReviewPage에서 페이지 진입 시에만 리뷰 가져옴
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref
+          .read(reviewViewModelProvider.notifier)
+          .getReviewByLocation(
+            double.parse(widget.mapX),
+            double.parse(widget.mapY),
+          );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    ReviewState reviewState = ref.watch(reviewViewModelProvider);
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        appBar: AppBar(title: Text(title)),
+        appBar: AppBar(title: Text(widget.title)),
         body: Container(
           decoration: BoxDecoration(color: Colors.white),
           child: Padding(
@@ -20,14 +45,30 @@ class ReviewPage extends StatelessWidget {
             child: ListView(
               children: [
                 SizedBox(height: 10),
-                ReviewItem('이안류에 휩쓸려갈뻔 했어요', '2025-07-14 23:32:04.478149'),
-                ReviewItem('사람이 너무 많았어요', '2025-07-14 23:31:04.478149'),
+
+                // 실제 Firebase 데이터를 동적으로 표시
+                ...reviewState.reviews.map(
+                  (review) =>
+                      ReviewItem(review.content, review.createdAt.toString()),
+                ),
+
+                // 리뷰가 없는 경우 메시지 표시
+                if (reviewState.reviews.isEmpty)
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    child: Text('아직 리뷰가 없습니다.', textAlign: TextAlign.center),
+                  ),
               ],
             ),
           ),
         ),
 
-        bottomSheet: ReviewBottomSheet(bottomPadding: 50),
+        bottomSheet: ReviewBottomSheet(
+          bottomPadding: 50,
+          title: widget.title,
+          mapX: widget.mapX,
+          mapY: widget.mapY,
+        ),
       ),
     );
   }

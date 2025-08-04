@@ -22,6 +22,18 @@ class LocationViewModel extends Notifier<LocationState> {
     LocationRepository repository = LocationRepository();
     state = LocationState(locations: await repository.searchPlaces(query));
   }
+
+  // 5. 현재
+  Future<void> searchCurrentLocation() async {
+    LocationRepository repository = LocationRepository();
+    try {
+      List<Location> results = await repository.searchCurrentLocation();
+      state = LocationState(locations: results);
+      print('현재 위치 검색 완료: ${results.length}개 결과');
+    } catch (e) {
+      print('현재 위치 검색 실패: $e');
+    }
+  }
 }
 
 // 5. 뷰모델 관리자 만들기

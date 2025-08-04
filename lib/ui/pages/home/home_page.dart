@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:location_review_search_app/data/model/location_model.dart';
 import 'package:location_review_search_app/ui/pages/home/home_view_model.dart';
 import 'package:location_review_search_app/ui/pages/home/widgets/address_item.dart';
-import 'package:location_review_search_app/ui/pages/review/review_page.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -48,9 +47,11 @@ class _HomePageState extends ConsumerState<HomePage> {
             ),
           ),
           actions: [
-            Container(
+            SizedBox(
               width: 50,
-              child: IconButton(onPressed: () {}, icon: Icon(Icons.gps_fixed)),
+              child: IconButton(onPressed: () {
+                ref.read(locationViewModelProvider.notifier).searchCurrentLocation();
+              }, icon: Icon(Icons.gps_fixed)),
             ),
           ],
         ),

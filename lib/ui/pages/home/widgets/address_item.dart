@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:location_review_search_app/ui/pages/review/review_page.dart';
 
+// 검색 결과로 나온 각 장소 정보를 카드 형태로 표시하는 위젯
+// 탭하면 해당 장소의 리뷰 페이지로 이동
+
 class AddressItem extends StatelessWidget {
   String title;
   String category;
@@ -20,11 +23,13 @@ class AddressItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      // 카드 탭 시 리뷰 페이지로 이동
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
+              // 장소 정보와 좌표를 ReviewPage에 전달
               return ReviewPage(title, mapX, mapY);
             },
           ),

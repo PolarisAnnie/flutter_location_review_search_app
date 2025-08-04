@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:location_review_search_app/data/model/review_model.dart';
 import 'package:location_review_search_app/ui/pages/review/review_view_model.dart';
 
+// 리뷰 입력을 위한 하단 바텀시트 위젯
 class ReviewBottomSheet extends ConsumerStatefulWidget {
   final double bottomPadding;
   final String title;

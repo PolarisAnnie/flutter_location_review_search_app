@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// 리뷰 항목 하나를 표시하는 위젯
 class ReviewItem extends StatelessWidget {
   String comment;
   String createdAt;

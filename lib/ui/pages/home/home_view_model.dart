@@ -23,7 +23,7 @@ class LocationViewModel extends Notifier<LocationState> {
     state = LocationState(locations: await repository.searchPlaces(query));
   }
 
-  // 5. 현재
+  // 4-2. 현재 위치 검색 메서드 추가 구현
   Future<void> searchCurrentLocation() async {
     LocationRepository repository = LocationRepository();
     try {

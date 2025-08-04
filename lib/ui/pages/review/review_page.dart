@@ -4,6 +4,7 @@ import 'package:location_review_search_app/ui/pages/review/review_view_model.dar
 import 'package:location_review_search_app/ui/pages/review/widgets/review_bottom_sheet.dart';
 import 'package:location_review_search_app/ui/pages/review/widgets/review_item.dart';
 
+// 장소에 대한 상세 리뷰 조회 및 작성할 수 있는 페이지 
 class ReviewPage extends ConsumerStatefulWidget {
   String title;
   String mapX;
@@ -19,6 +20,7 @@ class _ReviewPageState extends ConsumerState<ReviewPage> {
   // ReviewPage에서 페이지 진입 시에만 리뷰 가져옴
   void initState() {
     super.initState();
+     // 위젯 빌드 이후에 리뷰 데이터를 불러오기 위한 콜백 등록
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref
           .read(reviewViewModelProvider.notifier)
@@ -31,6 +33,7 @@ class _ReviewPageState extends ConsumerState<ReviewPage> {
 
   @override
   Widget build(BuildContext context) {
+    // ViewModel의 상태를 구독
     ReviewState reviewState = ref.watch(reviewViewModelProvider);
     return GestureDetector(
       onTap: () {
